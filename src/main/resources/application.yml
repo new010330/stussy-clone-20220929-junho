@@ -1,0 +1,16 @@
+server:
+  port: 8000
+
+spring:
+  mvc:
+    static-path-pattern: /static/**
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://web-study.cdnqudsux9ie.ap-northeast-2.rds.amazonaws.com:3306/stussy-202209029-junho
+    username: admin
+    password: 1q2w3e4r
+
+mybatis:
+  mapper-locations:
+    - /mappers/*.xml
