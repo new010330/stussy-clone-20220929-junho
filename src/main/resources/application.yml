@@ -10,10 +10,11 @@ spring:
     url: jdbc:mariadb://web-study.cdnqudsux9ie.ap-northeast-2.rds.amazonaws.com:3306/stussy-202209029-junho
     username: admin
     password: 1q2w3e4r
+
   security:
     user:
       name: admin
-      password: 1234
+      password: 1q2w3e4r
 
 
 mybatis:
