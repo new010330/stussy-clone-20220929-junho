@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account</title>
+    <title>Account</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/header.css">
-    <link rel="stylesheet" href="/static/css/account.css">
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="/static/css/aside.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+    
 </head>
 <body>
     <div id="container">
@@ -59,28 +60,38 @@
             <script src="/static/js/header.js"></script>
         </header>
         <main>
-            <div class="login">
-                <h1 class="login-title">ACCOUNT</h1>
-                <div class="login-container">
-                    <section class="login-current">
-                        <h2 class="login-subheader">신규 회원가입</h2>
-                        <div class="account-errors errors-invisible">
-                            <ul>
-                                
-                            </ul>
-                        </div>
-                        <div class="login-name">
-                            <div class="login-half">
-                                <input type="text" class="login-input" placeholder="이름">
+            <div class="admin">
+                <h1 class="admin-title">ADMIN PRODUCT ADD</h1>
+                <div class="admin-container">
+                    <aside class="admin-menus">
+                        <ul>
+                            <li><a href="/admin/product/list">상품 조회</a></li>
+                            <li><a href="/admin/product/addition">상품 등록</a></li>
+                            <li><a href="/admin/product/modification">상품 수정</a></li>
+                            <li><a href="/logout">로그아웃</a></li>
+                        </ul>
+                    </aside>
+                    <section class="admin-main">
+                        <input type="text" class="product-input" placeholder="상품명을 입력하세요.">
+                        <input type="text" class="product-input" placeholder="가격을 입력하세요.">
+                        <div class="product_option">
+                            <div class="option-half">
+                               <select class="product_input">
+                                    <option value="1">색상 선택</option>
+                               </select>
                             </div>
-                            <div class="login-half">
-                                <input type="text" class="login-input" placeholder="성">
+                            <div class="option-half">
+                                <select class="product_input">
+                                    <option value="1">사이즈 선택</option>
+                               </select>
                             </div>
                         </div>
-                        <input type="email" class="login-input" placeholder="이메일">
-                        <input type="password" class="login-input" placeholder="비밀번호">
-                        <button type="button" class="black-button login-button">확인</button>
-                        <a href="/account/login" class="login-return">로그인으로 돌아가기</a>
+                        <textarea class="product_input" placeholder="간략 설명"></textarea>
+                        <textarea class="product_input" placeholder="상세 설명"></textarea>
+                        <textarea class="product_input" placeholder="기타 설명"></textarea>
+                        <textarea class="product_input" placeholder="관리 방법"></textarea>
+                        <textarea class="product_input" placeholder="배송 설명"></textarea>
+                        <button type="button" class="product-button black-button">등록하기</button>
                     </section>
                 </div>
             </div>
@@ -88,6 +99,6 @@
         <footer>
         </footer>
     </div>
-    <script src="/static/js/register.js"></script>
+    <script src="/static/js/login.js"></script>
 </body>
 </html>

@@ -23,21 +23,23 @@
         <collection property="role" resultMap="role"></collection>
     </resultMap>
 
-    <insert id="save" parameterType="com.stussy.stussclone20220929junho.domain.User"> <!--데이터베이스 정보-->
+    <insert id="save" parameterType="com.stussy.stussclone20220929junho.domain.User">
         insert into
-            user_mst
+        user_mst
         values(
-            0,
-            #{username},
-            #{oauth_username},
-            #{name},
-            #{email},
-            #{provider},
-            #{role_id},
-            now(),
-            now()
+        0,
+        #{username},
+        #{oauth_username},
+        #{password},
+        #{name},
+        #{email},
+        #{provider},
+        #{role_id},
+        now(),
+        now()
         )
     </insert>
+
     <select id="findUserByEmail" parameterType="String" resultMap="user">
         select
         um.id,

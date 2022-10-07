@@ -19,20 +19,19 @@ public class ValidationAop {
     private void pointCut() {}
 
     @Before("pointCut()")
-    public void around(JoinPoint joinPoint) throws Throwable {
+    public void before(JoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
 
         BeanPropertyBindingResult bindingResult = null;
 
-        for (Object arg : args) {
-            if (arg.getClass() == BeanPropertyBindingResult.class) {
+        for(Object arg : args) {
+            if(arg.getClass() == BeanPropertyBindingResult.class){
                 bindingResult = (BeanPropertyBindingResult) arg;
                 break;
             }
         }
 
-        if (bindingResult.hasErrors()) {
-            log.error("유효성 검사 오류 발생");
+        if(bindingResult.hasErrors()){
             Map<String, String> errorMap = new HashMap<String, String>();
 
             bindingResult.getFieldErrors().forEach(error -> {
@@ -40,11 +39,12 @@ public class ValidationAop {
             });
 
             throw new CustomValidationException("Validation failed", errorMap);
-//            return ResponseEntity.badRequest().body(new CMRespDto<>(-1, "유효성 검사 실패", errorMap));
         }
     }
+
     @AfterReturning(value = "pointCut()", returning = "returnObj")
     public void afterReturn(JoinPoint joinPoint, Object returnObj) {
         log.info("Validation success: {}", returnObj);
     }
+
 }

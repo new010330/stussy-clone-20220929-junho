@@ -32,7 +32,7 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public boolean register(RegisterReqDto registerReqDto) throws Exception {
         User userEntity = registerReqDto.toUserEntity();
-        int result = accountRepository.sava(userEntity);
+        int result = accountRepository.save(userEntity);
 
         return result != 0;
     }

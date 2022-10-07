@@ -5,6 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface AccountRepository {
-    public int sava(User user);
+    public int save(User user);
     public User findUserByEmail(String Email);
 }
