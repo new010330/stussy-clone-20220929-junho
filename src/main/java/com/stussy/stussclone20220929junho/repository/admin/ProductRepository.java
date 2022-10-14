@@ -1,5 +1,6 @@
 package com.stussy.stussclone20220929junho.repository.admin;
 
+
 import com.stussy.stussclone20220929junho.domain.Product;
 import com.stussy.stussclone20220929junho.domain.ProductImgFile;
 import org.apache.ibatis.annotations.Mapper;

@@ -12,10 +12,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class ProductImgFile {
+
     private int id;
     private int product_id;
+
     private String origin_name;
     private String temp_name;
+
     private LocalDateTime create_date;
     private LocalDateTime update_date;
 }

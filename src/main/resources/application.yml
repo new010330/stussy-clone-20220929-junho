@@ -22,4 +22,4 @@ mybatis:
     - /mappers/*.xml
 
 file:
-  path:C:\junho\web\springboot\stussy-clone-20220929-junho/upload/
+  path: C:\junil\junho\web\springboot\stussy-clone-20220929-junho/upload/

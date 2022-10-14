@@ -1,14 +1,11 @@
 package com.stussy.stussclone20220929junho.domain;
 
-import com.stussy.stussclone20220929junho.dto.validation.ValidationGroups;
+import com.stussy.stussclone20220929junho.dto.admin.ProductListRespDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,4 +32,24 @@ public class Product {
 
     private LocalDateTime create_date;
     private LocalDateTime update_date;
+
+    private int product_total_count;
+
+    public ProductListRespDto toListRespDto() {
+        return ProductListRespDto.builder()
+                .id(id)
+                .category(category)
+                .name(name)
+                .price(price)
+                .color(color)
+                .size(size)
+                .infoSimple(info_simple)
+                .infoDetail(info_detail)
+                .infoOption(info_option)
+                .infoManagement(info_management)
+                .infoShipping(info_shipping)
+                .productImgFiles(product_img_files)
+                .productTotalCount(product_total_count)
+                .build();
+    }
 }
