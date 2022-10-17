@@ -2,6 +2,7 @@ const categorySelectInput = document.querySelector(".category-select .product-in
 const searchInput = document.querySelector(".product-search .product-input");
 const searchButton = document.querySelector(".search-button"); 
 
+let imgMstArray = new Array();
 
 let page = 1;
 let category = "ALL";
@@ -118,6 +119,7 @@ function addProducts(productList) {
 
     productList.forEach((product) => {
         
+        
         listBody.innerHTML += `
         <tr>
             <td class="product-id">${product.id}</td>
@@ -172,7 +174,20 @@ function addProducts(productList) {
                                 </div>
                             </form>
                             <div class="product-images">
-                                
+        `;
+        let imgDtlArray = new Array();
+        product.productImgFiles.forEach(imgFile => {
+            imgDtlArray.push(imgFile);
+            listBody.innerHTML += `
+            <div class="img-box">
+                <i class="fa-solid fa-xmark"></i>
+                <img class="product-img" src="/image/product/${imgFile.temp_name}">
+            </div>
+            `;
+        });
+        imgMstArray.push();
+
+        listBody.innerHTML += `
                             </div>
                         </td>
                     </tr>
