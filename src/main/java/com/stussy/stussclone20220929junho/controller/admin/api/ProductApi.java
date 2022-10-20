@@ -4,6 +4,7 @@ import com.stussy.stussclone20220929junho.aop.annotation.LogAspect;
 import com.stussy.stussclone20220929junho.aop.annotation.ValidAspect;
 import com.stussy.stussclone20220929junho.dto.CMRespDto;
 import com.stussy.stussclone20220929junho.dto.admin.ProductAdditionReqDto;
+import com.stussy.stussclone20220929junho.dto.admin.ProductModificationReqDto;
 import com.stussy.stussclone20220929junho.dto.validation.ValidationSequence;
 import com.stussy.stussclone20220929junho.exception.CustomInternalServerErrorException;
 import com.stussy.stussclone20220929junho.service.admin.ProductService;
@@ -48,5 +49,15 @@ public class ProductApi {
                                             @RequestParam @Nullable String searchValue) throws Exception {
 
         return ResponseEntity.ok(new CMRespDto<>(1, "Successfully", productService.getProductList(page, category, searchValue)));
+    }
+
+    @LogAspect
+//    @ValidAspect
+    @PostMapping("/product/modification")
+    public ResponseEntity<?> updateProduct(ProductModificationReqDto productModificationReqDto) throws Exception {
+
+
+
+        return ResponseEntity.ok(new CMRespDto<>(1, "Successfully", true));
     }
 }
