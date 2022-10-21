@@ -15,7 +15,7 @@ public class AdminPageController {
         return "admin/product_add";
     }
 
-    @GetMapping("/products/")
+    @GetMapping("/products")
     public String loadProductList() {
         return "admin/product_list";
     }
