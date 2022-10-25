@@ -18,7 +18,7 @@ class CollectionReqParam {
 
     getObject() {
         return {
-            page: this.page
+            page: this.#page
         }
     }
 }
@@ -83,13 +83,36 @@ class CollectionsService {
                 </li>
             `;
         });
+
+        this.addProductClickEvent(responseData);
+        this.addScrollEvent();
     }
 
     addScrollEvent() {
-        
+        const html = document.querySelector("html");
+        const body = document.querySelector("body");
+        body.onscroll = () => {
+            let scrollStatus = body.offsetHeight - html.clientHeight - html.scrollTop;
+            // 문서높이(전체 높이) - html 높이(현재 보이는 높이) - 스크롤 탑(스크롤 높이)
+            if(scrollStatus > -1 && scrollStatus < 30) {
+                CollectionReqParam.getInstance().setPage(Number(CollectionReqParam.getInstance().getPage()) + 1);
+                CollectionsService.getInstance().loadCollections();
+            }
+        }
+    }
+
+    addProductClickEvent(responseData) {
+        const producs = document.querySelectorAll(".collection-product");
+        products.forEach((product, index) => {
+            product.onclick = () => {
+                location.href = `/products/${responseData[index].groupid}`;
+            }
+
+        });
     }
 }
 
 window.onload = () => {
     CollectionsService.getInstance().loadCollections();
+    
 }

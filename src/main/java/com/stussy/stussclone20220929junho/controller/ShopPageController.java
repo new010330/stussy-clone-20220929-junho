@@ -12,4 +12,10 @@ public class ShopPageController {
         return  "shop/collections";
     }
 
+    @GetMapping("/products/{groupId}")
+    public String loadProductDetail(@PathVariable int groupId) {
+        return "shop/product";
+    }
+
+
 }
