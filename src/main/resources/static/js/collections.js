@@ -3,7 +3,7 @@ class CollectionReqParam {
     #page = 0;
 
     constructor() {
-        this.page = 1
+        this.#page = 1
     }
 
     static getInstance() {
@@ -60,7 +60,6 @@ class CollectionsApi {
 
 class CollectionsService {
     static #instance = null;
-
     static getInstance() {
         if(this.#instance == null) {
             this.#instance = new CollectionsService();
@@ -68,11 +67,14 @@ class CollectionsService {
         return this.#instance;
     }
 
+    groupIdList = new Array();
+
     loadCollections() {
         const responseData = CollectionsApi.getInstance().getCollections(CollectionReqParam.getInstance().getObject());
 
         const collectionProducts = document.querySelector(".collection-products");
         responseData.forEach(collection => {
+            this.groupIdList.push(collection.groupId);
             collectionProducts.innerHTML += `
                 <li class="collection-product">
                     <div class="product-img">
@@ -84,7 +86,7 @@ class CollectionsService {
             `;
         });
 
-        this.addProductClickEvent(responseData);
+        this.addProductClickEvent();
         this.addScrollEvent();
     }
 
@@ -93,7 +95,6 @@ class CollectionsService {
         const body = document.querySelector("body");
         body.onscroll = () => {
             let scrollStatus = body.offsetHeight - html.clientHeight - html.scrollTop;
-            // 문서높이(전체 높이) - html 높이(현재 보이는 높이) - 스크롤 탑(스크롤 높이)
             if(scrollStatus > -1 && scrollStatus < 30) {
                 CollectionReqParam.getInstance().setPage(Number(CollectionReqParam.getInstance().getPage()) + 1);
                 CollectionsService.getInstance().loadCollections();
@@ -101,14 +102,13 @@ class CollectionsService {
         }
     }
 
-    addProductClickEvent(responseData) {
-        const producs = document.querySelectorAll(".collection-product");
+    addProductClickEvent() {
+        const products = document.querySelectorAll(".collection-product");
         products.forEach((product, index) => {
             product.onclick = () => {
-                location.href = `/products/${responseData[index].groupid}`;
+                location.href = `/products/${this.groupIdList[index]}`;
             }
-
-        });
+        })
     }
 }
 
