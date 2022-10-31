@@ -1,6 +1,8 @@
 package com.stussy.stussclone20220929junho.config;
 
 import com.stussy.stussclone20220929junho.handler.auth.AuthFailureHandler;
+import com.stussy.stussclone20220929junho.service.auth.PrincipalOauth2Service;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,7 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity // 기존의 WebSecurityConfigurerAdapter 클래스를 해당 SecurityConfig로 대체하겠다.
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final PrincipalOauth2Service principalOauth2Service;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -26,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /*<<<<<<<<<<<<<<<<<< Page >>>>>>>>>>>>>>>>*/
                 .antMatchers("/admin/**", "/api/admin/**")
                 .access("hasRole('ADMIN') or hasRole('MANAGER')")
-                .antMatchers("/account") //해당 요청 주소들은
+                .antMatchers("/account", "/order/**") //해당 요청 주소들은
                 .access("hasRole('USER') or hasRole('ADMIN') or hasRole('MANAGER')")
 
                 .antMatchers("/", "/index", "/collections/**")
@@ -39,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll() //모두 접근 권한을 허용해라.
 
                 /*<<<<<<<<<<<<<<<<<< API >>>>>>>>>>>>>>>>*/
-                .antMatchers("/api/account/register", "/api/collections/**")
+                .antMatchers("/api/account/register", "/api/collections/**", "/api/auth/**")
                 .permitAll()
 
                 .anyRequest() //antMatchers 외에 다른 모든 요청들은
@@ -52,6 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/account/login") //우리가 만든 로그인 페이지를 사용해라. GET 요청
                 .loginProcessingUrl("/account/login")   // 로그인 로직(PrincipalDetailsService) POST 요청
                 .failureHandler(new AuthFailureHandler())
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(principalOauth2Service)
+                .and()
                 .defaultSuccessUrl("/index");
 
     }
